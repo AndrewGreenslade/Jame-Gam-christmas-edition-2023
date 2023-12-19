@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 53479623287719099}
   m_Father: {fileID: 0}
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd78ad1b02523246af003cc14e20b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 15
   _angularSpeed: 540
   _acceleration: 50
   _deceleration: 20
@@ -183,10 +183,10 @@ MonoBehaviour:
   _maxMidAirJumps: 0
   _useRootMotion: 0
   _rootMotionRotation: 0
-  _forwardSpeed: 5
-  _backwardSpeed: 3
-  _strafeSpeed: 4
-  _runSpeedMultiplier: 2
+  _forwardSpeed: 15
+  _backwardSpeed: 9
+  _strafeSpeed: 12
+  _runSpeedMultiplier: 6
 --- !u!1 &7345813371373345494
 GameObject:
   m_ObjectHideFlags: 0
