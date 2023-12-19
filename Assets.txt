@@ -1,5 +1,18 @@
-Anvil
-Toys (cars, bicycle, dolls, etc.)
-Random decoration assets? 
-Presents
-Christmas Tree
+Thing we need to make with anvil:
+	Toys:
+		Car
+		bicycle
+		doll
+
+Usable Items:
+	Bauble launcher
+	toy gun (Green army soldier style)
+	Not so nerf gun
+	
+
+Random decoration assets:
+
+	Present
+	Table
+	Christmas Tree
+	
