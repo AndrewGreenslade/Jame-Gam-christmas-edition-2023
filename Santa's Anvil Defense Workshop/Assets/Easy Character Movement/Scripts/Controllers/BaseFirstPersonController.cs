@@ -4,11 +4,11 @@ namespace ECM.Controllers
 {
     /// <summary>
     /// Base First Person Controller.
-    /// 
+    ///
     /// Base class for a first person controller.
     /// It inherits from 'BaseCharacterController' and extends it to perform classic FPS movement.
-    /// 
-    /// As the base character controllers, this default behaviour can easily be modified or completely replaced in a derived class. 
+    ///
+    /// As the base character controllers, this default behaviour can easily be modified or completely replaced in a derived class.
     /// </summary>
 
     public class BaseFirstPersonController : BaseCharacterController
@@ -116,8 +116,11 @@ namespace ECM.Controllers
 
             var yScale = isCrouching ? Mathf.Clamp01(crouchingHeight / standingHeight) : 1.0f;
 
-            cameraPivotTransform.localScale = Vector3.MoveTowards(cameraPivotTransform.localScale,
-                new Vector3(1.0f, yScale, 1.0f), 5.0f * Time.deltaTime);
+            cameraPivotTransform.localScale = Vector3.MoveTowards(
+                cameraPivotTransform.localScale,
+                new Vector3(1.0f, yScale, 1.0f),
+                5.0f * Time.deltaTime
+            );
         }
 
         /// <summary>
@@ -189,7 +192,7 @@ namespace ECM.Controllers
 
         /// <summary>
         /// Overrides 'BaseCharacterController' HandleInput method,
-        /// to perform custom input code. 
+        /// to perform custom input code.
         /// </summary>
 
         protected override void HandleInput()
@@ -242,9 +245,17 @@ namespace ECM.Controllers
         /// <summary>
         /// Initialize this.
         /// </summary>
+        ///
+
+        public static BaseFirstPersonController Instance;
 
         public override void Awake()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+
             // Call the parent class' version of method
 
             base.Awake();
@@ -257,15 +268,20 @@ namespace ECM.Controllers
                 Debug.LogError(
                     string.Format(
                         "BaseFPSController: No 'MouseLook' found. Please add a 'MouseLook' component to '{0}' game object",
-                        name));
+                        name
+                    )
+                );
             }
 
             cameraPivotTransform = transform.Find("Camera_Pivot");
             if (cameraPivotTransform == null)
             {
-                Debug.LogError(string.Format(
-                    "BaseFPSController: No 'Camera_Pivot' found. Please parent a transform gameobject to '{0}' game object.",
-                    name));
+                Debug.LogError(
+                    string.Format(
+                        "BaseFPSController: No 'Camera_Pivot' found. Please parent a transform gameobject to '{0}' game object.",
+                        name
+                    )
+                );
             }
 
             var cam = GetComponentInChildren<Camera>();
@@ -273,7 +289,10 @@ namespace ECM.Controllers
             {
                 Debug.LogError(
                     string.Format(
-                        "BaseFPSController: No 'Camera' found. Please parent a camera to '{0}' game object.", name));
+                        "BaseFPSController: No 'Camera' found. Please parent a camera to '{0}' game object.",
+                        name
+                    )
+                );
             }
             else
             {

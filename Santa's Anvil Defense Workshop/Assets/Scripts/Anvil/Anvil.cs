@@ -69,4 +69,21 @@ public class Anvil : MonoBehaviour
     {
         get { return string.Format("{0:00}s", Mathf.FloorToInt(countdown % 60)); }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Debug.Log("Player");
+            PopupManager.Instance.ShowPickupMessage("E", KeyCode.E, UI.ShowUI);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            PopupManager.Instance.HidePickupMessage();
+        }
+    }
 }

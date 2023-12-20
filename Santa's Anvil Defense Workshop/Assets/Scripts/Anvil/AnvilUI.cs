@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ECM.Controllers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +44,22 @@ public class AnvilUI : MonoBehaviour
     public void ToySelected(int toyID)
     {
         currentToy = toyID;
+        HideUI();
+    }
+
+    public void HideUI()
+    {
         toySelectionUI.SetActive(false);
+        BaseFirstPersonController.Instance.pause = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+    }
+
+    public void ShowUI()
+    {
+        toySelectionUI.SetActive(true);
+        BaseFirstPersonController.Instance.pause = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
