@@ -1,23 +1,23 @@
-﻿using ECM.Common;
-using System;
+﻿using System;
 using System.Collections;
+using ECM.Common;
 using UnityEngine;
 
 namespace ECM.Components
 {
     /// <summary>
     /// Character Movement.
-    /// 
+    ///
     /// 'CharacterMovement' is the core of the ECM system and is responsible to perform
     /// all the heavy work to move a character (a.k.a. Character motor),
     /// such as apply forces, impulses, constraints, platforms interaction, etc.
-    /// 
+    ///
     /// This is analogous to the Unity's character controller, but unlike the Unity character controller,
     /// this make use of Rigidbody physics.
-    /// 
+    ///
     /// The controller (eg: 'BaseCharacterController') determines how the Character should be moved,
     /// such as in response from user input, AI, animation, etc.
-    /// and feed this information to the 'CharacterMovement' component, which perform the movement. 
+    /// and feed this information to the 'CharacterMovement' component, which perform the movement.
     /// </summary>
 
     public sealed class CharacterMovement : MonoBehaviour
@@ -25,24 +25,32 @@ namespace ECM.Components
         #region EDITOR EXPOSED FIELDS
 
         [Header("Speed Limiters")]
-        [Tooltip("The maximum lateral speed this character can move, " +
-                 "including movement from external forces like sliding, collisions, etc.")]
+        [Tooltip(
+            "The maximum lateral speed this character can move, "
+                + "including movement from external forces like sliding, collisions, etc."
+        )]
         [SerializeField]
         private float _maxLateralSpeed = 10.0f;
 
-        [Tooltip("The maximum rising speed, " +
-                 "including movement from external forces like sliding, collisions, etc.")]
+        [Tooltip(
+            "The maximum rising speed, "
+                + "including movement from external forces like sliding, collisions, etc."
+        )]
         [SerializeField]
         private float _maxRiseSpeed = 20.0f;
 
-        [Tooltip("The maximum falling speed, " +
-                 "including movement from external forces like sliding, collisions, etc.")]
+        [Tooltip(
+            "The maximum falling speed, "
+                + "including movement from external forces like sliding, collisions, etc."
+        )]
         [SerializeField]
         private float _maxFallSpeed = 20.0f;
 
         [Header("Gravity")]
-        [Tooltip("Enable / disable character's custom gravity." +
-                 "If enabled the character will be affected by this gravity force.")]
+        [Tooltip(
+            "Enable / disable character's custom gravity."
+                + "If enabled the character will be affected by this gravity force."
+        )]
         [SerializeField]
         private bool _useGravity = true;
 
@@ -64,12 +72,16 @@ namespace ECM.Components
         private float _slideGravityMultiplier = 2.0f;
 
         [Header("Ground-Snap")]
-        [Tooltip("When enabled, will force the character to safely follow the walkable 'ground' geometry.")]
+        [Tooltip(
+            "When enabled, will force the character to safely follow the walkable 'ground' geometry."
+        )]
         [SerializeField]
         private bool _snapToGround = true;
 
-        [Tooltip("A tolerance of how close to the 'ground' maintain the character.\n" +
-                 "0 == no snap at all, 1 == 100% stick to ground.")]
+        [Tooltip(
+            "A tolerance of how close to the 'ground' maintain the character.\n"
+                + "0 == no snap at all, 1 == 100% stick to ground."
+        )]
         [Range(0.0f, 1.0f)]
         [SerializeField]
         private float _snapStrength = 0.5f;
@@ -81,7 +93,7 @@ namespace ECM.Components
         // The buffer to store the overlap test results into.
 
         private static readonly Collider[] OverlappedColliders = new Collider[8];
-        
+
         private Coroutine _lateFixedUpdateCoroutine;
 
         private Vector3 _normal;
@@ -165,7 +177,7 @@ namespace ECM.Components
         }
 
         /// <summary>
-        /// The maximum angle (in degrees) the slope needs to be before the character starts to slide. 
+        /// The maximum angle (in degrees) the slope needs to be before the character starts to slide.
         /// </summary>
 
         public float slopeLimit
@@ -243,7 +255,7 @@ namespace ECM.Components
 
         /// <summary>
         /// The real surface normal.
-        /// 
+        ///
         /// This is different from groundNormal, because when SphereCast contacts the edge of a collider
         /// (rather than a face directly on) the hit.normal that is returned is the interpolation of the two normals
         /// of the faces that are joined to that edge.
@@ -300,7 +312,8 @@ namespace ECM.Components
         {
             get
             {
-                return groundDetection.prevGroundHit.isOnGround && groundDetection.prevGroundHit.isValidGround;
+                return groundDetection.prevGroundHit.isOnGround
+                    && groundDetection.prevGroundHit.isValidGround;
             }
         }
 
@@ -529,7 +542,7 @@ namespace ECM.Components
         /// </summary>
         /// <param name="pause">True == pause, false == unpause</param>
         /// <param name="restoreVelocity">Should restore saved velocity on resume?</param>
-        
+
         public void Pause(bool pause, bool restoreVelocity = true)
         {
             if (pause)
@@ -570,7 +583,11 @@ namespace ECM.Components
         /// Set CapsuleCollider dimensions. Center is automatically configured.
         /// </summary>
 
-        public void SetCapsuleDimensions(Vector3 capsuleCenter, float capsuleRadius, float capsuleHeight)
+        public void SetCapsuleDimensions(
+            Vector3 capsuleCenter,
+            float capsuleRadius,
+            float capsuleHeight
+        )
         {
             capsuleCollider.center = capsuleCenter;
             capsuleCollider.radius = capsuleRadius;
@@ -611,12 +628,24 @@ namespace ECM.Components
         /// <param name="overlapCount">The number of overlapping colliders.</param>
         /// <param name="overlappingMask">A Layer mask that is used to selectively ignore colliders when casting a capsule.</param>
         /// <param name="queryTriggerInteraction">Specifies whether this query should hit Triggers.</param>
-        
-        private void OverlapCapsule(Vector3 bottom, Vector3 top, float radius, out int overlapCount,
-            LayerMask overlappingMask, QueryTriggerInteraction queryTriggerInteraction)
+
+        private void OverlapCapsule(
+            Vector3 bottom,
+            Vector3 top,
+            float radius,
+            out int overlapCount,
+            LayerMask overlappingMask,
+            QueryTriggerInteraction queryTriggerInteraction
+        )
         {
-            var colliderCount = Physics.OverlapCapsuleNonAlloc(bottom, top, radius, OverlappedColliders,
-                overlappingMask, queryTriggerInteraction);
+            var colliderCount = Physics.OverlapCapsuleNonAlloc(
+                bottom,
+                top,
+                radius,
+                OverlappedColliders,
+                overlappingMask,
+                queryTriggerInteraction
+            );
 
             overlapCount = colliderCount;
             for (var i = 0; i < colliderCount; i++)
@@ -641,8 +670,13 @@ namespace ECM.Components
         /// <param name="queryTriggerInteraction">Specifies whether this query should hit Triggers.</param>
         /// <returns></returns>
 
-        public Collider[] OverlapCapsule(Vector3 position, Quaternion rotation, out int overlapCount,
-            LayerMask overlapMask, QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Ignore)
+        public Collider[] OverlapCapsule(
+            Vector3 position,
+            Quaternion rotation,
+            out int overlapCount,
+            LayerMask overlapMask,
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Ignore
+        )
         {
             var center = capsuleCollider.center;
             var radius = capsuleCollider.radius;
@@ -655,8 +689,14 @@ namespace ECM.Components
             var top = position + rotation * topSphereCenter;
             var bottom = position + rotation * bottomSphereCenter;
 
-            var colliderCount = Physics.OverlapCapsuleNonAlloc(bottom, top, radius, OverlappedColliders, overlapMask,
-                queryTriggerInteraction);
+            var colliderCount = Physics.OverlapCapsuleNonAlloc(
+                bottom,
+                top,
+                radius,
+                OverlappedColliders,
+                overlapMask,
+                queryTriggerInteraction
+            );
 
             overlapCount = colliderCount;
             for (var i = 0; i < colliderCount; i++)
@@ -719,7 +759,11 @@ namespace ECM.Components
         private void OverlapRecovery(ref Vector3 probingPosition, Quaternion probingRotation)
         {
             int overlapCount;
-            var overlappedColliders = groundDetection.OverlapCapsule(probingPosition, probingRotation, out overlapCount);
+            var overlappedColliders = groundDetection.OverlapCapsule(
+                probingPosition,
+                probingRotation,
+                out overlapCount
+            );
 
             for (var i = 0; i < overlapCount; i++)
             {
@@ -733,9 +777,18 @@ namespace ECM.Components
 
                 float distance;
                 Vector3 direction;
-                if (!Physics.ComputePenetration(capsuleCollider, probingPosition, probingRotation, overlappedCollider,
-                    overlappedColliderTransform.position, overlappedColliderTransform.rotation, out direction,
-                    out distance))
+                if (
+                    !Physics.ComputePenetration(
+                        capsuleCollider,
+                        probingPosition,
+                        probingRotation,
+                        overlappedCollider,
+                        overlappedColliderTransform.position,
+                        overlappedColliderTransform.rotation,
+                        out direction,
+                        out distance
+                    )
+                )
                     continue;
 
                 probingPosition += direction * distance;
@@ -752,11 +805,20 @@ namespace ECM.Components
         /// <param name="groundHitInfo">If found any 'ground', this will contain more information about it</param>
         /// <param name="scanDistance">The maximum scan distance (cast distance)</param>
 
-        public bool ComputeGroundHit(Vector3 probingPosition, Quaternion probingRotation, out GroundHit groundHitInfo,
-            float scanDistance = Mathf.Infinity)
+        public bool ComputeGroundHit(
+            Vector3 probingPosition,
+            Quaternion probingRotation,
+            out GroundHit groundHitInfo,
+            float scanDistance = Mathf.Infinity
+        )
         {
             groundHitInfo = new GroundHit();
-            return groundDetection.ComputeGroundHit(probingPosition, probingRotation, ref groundHitInfo, scanDistance);
+            return groundDetection.ComputeGroundHit(
+                probingPosition,
+                probingRotation,
+                ref groundHitInfo,
+                scanDistance
+            );
         }
 
         /// <summary>
@@ -788,10 +850,13 @@ namespace ECM.Components
 
             if (direction.sqrMagnitude < 0.0001f)
                 return;
-            
+
             var targetRotation = Quaternion.LookRotation(direction, transform.up);
-            var newRotation = Quaternion.Slerp(cachedRigidbody.rotation, targetRotation,
-                angularSpeed * Mathf.Deg2Rad * Time.deltaTime);
+            var newRotation = Quaternion.Slerp(
+                cachedRigidbody.rotation,
+                targetRotation,
+                angularSpeed * Mathf.Deg2Rad * Time.deltaTime
+            );
 
             cachedRigidbody.MoveRotation(newRotation);
         }
@@ -833,7 +898,8 @@ namespace ECM.Components
         public void ApplyVerticalImpulse(float impulse)
         {
             Vector3 up = transform.up;
-            cachedRigidbody.velocity = Vector3.ProjectOnPlane(cachedRigidbody.velocity, up) + up * impulse;
+            cachedRigidbody.velocity =
+                Vector3.ProjectOnPlane(cachedRigidbody.velocity, up) + up * impulse;
         }
 
         /// <summary>
@@ -843,7 +909,8 @@ namespace ECM.Components
 
         public void ApplyImpulse(Vector3 impulse)
         {
-            cachedRigidbody.velocity += impulse - Vector3.Project(cachedRigidbody.velocity, transform.up);
+            cachedRigidbody.velocity +=
+                impulse - Vector3.Project(cachedRigidbody.velocity, transform.up);
         }
 
         /// <summary>
@@ -862,7 +929,7 @@ namespace ECM.Components
         /// <summary>
         /// Permanently halts character's grounding (ground detection, ground snap, etc) until EnableGroundDetection is called.
         /// </summary>
-        
+
         public void DisableGroundDetection()
         {
             _performGroundDetection = false;
@@ -890,7 +957,7 @@ namespace ECM.Components
             isOnPlatform = false;
             platformVelocity = Vector3.zero;
             platformAngularVelocity = Vector3.zero;
-            
+
             _normal = transform.up;
         }
 
@@ -936,8 +1003,10 @@ namespace ECM.Components
             else
             {
                 // Flatten normal on invalid 'ground' to prevent climbing it
-                
-                _normal = Vector3.Cross(Vector3.Cross(up, groundDetection.groundNormal), up).normalized;
+
+                _normal = Vector3
+                    .Cross(Vector3.Cross(up, groundDetection.groundNormal), up)
+                    .normalized;
             }
 
             // Check if we are over a rigidbody...
@@ -966,7 +1035,7 @@ namespace ECM.Components
         /// Sweep towards rigidbody's velocity looking for 'ground',
         /// if find valid 'ground', adjust rigidbody's velocity to prevent 'ground' penetration.
         /// </summary>
-        
+
         private void PreventGroundPenetration()
         {
             // If on ground, return
@@ -1005,7 +1074,9 @@ namespace ECM.Components
 
             // Project remaining lateral velocity on plane without speed loss
 
-            remainingLateralVelocity = MathLibrary.GetTangent(remainingLateralVelocity, hitInfo.normal, up) * remainingLateralVelocity.magnitude;
+            remainingLateralVelocity =
+                MathLibrary.GetTangent(remainingLateralVelocity, hitInfo.normal, up)
+                * remainingLateralVelocity.magnitude;
 
             // Compute new final velocity,
             // this is the velocity to contact point plus any remaining lateral velocity projected onto the plane
@@ -1046,7 +1117,9 @@ namespace ECM.Components
                 {
                     // Walkable 'ground' movement
 
-                    desiredVelocity = MathLibrary.GetTangent(desiredVelocity, _normal, up) * Mathf.Min(desiredVelocity.magnitude, maxDesiredSpeed);
+                    desiredVelocity =
+                        MathLibrary.GetTangent(desiredVelocity, _normal, up)
+                        * Mathf.Min(desiredVelocity.magnitude, maxDesiredSpeed);
 
                     velocity += desiredVelocity - velocity;
                 }
@@ -1082,8 +1155,9 @@ namespace ECM.Components
 
                             var lateralVelocity = Vector3.ProjectOnPlane(velocity, up);
 
-                            desiredVelocity = Vector3.ProjectOnPlane(desiredVelocity, _normal) +
-                                              Vector3.Project(lateralVelocity, _normal);
+                            desiredVelocity =
+                                Vector3.ProjectOnPlane(desiredVelocity, _normal)
+                                + Vector3.Project(lateralVelocity, _normal);
 
                             desiredVelocity = Vector3.ClampMagnitude(desiredVelocity, speedLimit);
                         }
@@ -1101,7 +1175,7 @@ namespace ECM.Components
                 if (useGravity)
                     velocity += gravity * Time.deltaTime;
             }
-            
+
             // If moving towards a step,
             // prevent too steep velocities, anything above 75 degrees will be dampened
 
@@ -1126,8 +1200,14 @@ namespace ECM.Components
         /// Perform an accelerated friction based movement when on ground.
         /// </summary>
 
-        private void ApplyGroundMovement(Vector3 desiredVelocity, float maxDesiredSpeed, float acceleration,
-            float deceleration, float friction, float brakingFriction)
+        private void ApplyGroundMovement(
+            Vector3 desiredVelocity,
+            float maxDesiredSpeed,
+            float acceleration,
+            float deceleration,
+            float friction,
+            float brakingFriction
+        )
         {
             var up = transform.up;
             var deltaTime = Time.deltaTime;
@@ -1143,7 +1223,10 @@ namespace ECM.Components
                 // Split desiredVelocity into direction and magnitude
 
                 var desiredSpeed = desiredVelocity.magnitude;
-                var speedLimit = desiredSpeed > 0.0f ? Mathf.Min(desiredSpeed, maxDesiredSpeed) : maxDesiredSpeed;
+                var speedLimit =
+                    desiredSpeed > 0.0f
+                        ? Mathf.Min(desiredSpeed, maxDesiredSpeed)
+                        : maxDesiredSpeed;
 
                 // Only apply braking if there is no acceleration (input == zero || acceleration == 0)
 
@@ -1172,7 +1255,10 @@ namespace ECM.Components
 
                     // Friction (grip / snappy)
 
-                    v = v - (v - desiredDirection * v.magnitude) * Mathf.Min(friction * deltaTime, 1.0f);
+                    v =
+                        v
+                        - (v - desiredDirection * v.magnitude)
+                            * Mathf.Min(friction * deltaTime, 1.0f);
 
                     // Acceleration
 
@@ -1188,7 +1274,7 @@ namespace ECM.Components
                 // Slide on steep slope
 
                 isSliding = true;
-                
+
                 velocity += gravity * (slideGravityMultiplier * Time.deltaTime);
             }
         }
@@ -1196,12 +1282,19 @@ namespace ECM.Components
         /// <summary>
         /// Perform an accelerated friction based movement when in air (or invalid ground).
         /// </summary>
-        
-        private void ApplyAirMovement(Vector3 desiredVelocity, float maxDesiredSpeed, float acceleration,
-            float deceleration, float friction, float brakingFriction, bool onlyLateral = true)
+
+        private void ApplyAirMovement(
+            Vector3 desiredVelocity,
+            float maxDesiredSpeed,
+            float acceleration,
+            float deceleration,
+            float friction,
+            float brakingFriction,
+            bool onlyLateral = true
+        )
         {
             // If onlyLateral, discards any vertical velocity (leaves rigidbody's vertical velocity unaffected)
-            
+
             var up = transform.up;
             var v = onlyLateral ? Vector3.ProjectOnPlane(velocity, up) : velocity;
 
@@ -1222,24 +1315,26 @@ namespace ECM.Components
 
                     var lateralVelocity = Vector3.ProjectOnPlane(velocity, up);
 
-                    desiredVelocity = Vector3.ProjectOnPlane(desiredVelocity, _normal) +
-                                      Vector3.Project(lateralVelocity, _normal);
+                    desiredVelocity =
+                        Vector3.ProjectOnPlane(desiredVelocity, _normal)
+                        + Vector3.Project(lateralVelocity, _normal);
 
                     desiredVelocity = Vector3.ClampMagnitude(desiredVelocity, maxLength);
                 }
-
             }
 
             // Split desiredVelocity into direction and magnitude
 
             var desiredSpeed = desiredVelocity.magnitude;
-            var speedLimit = desiredSpeed > 0.0f ? Mathf.Min(desiredSpeed, maxDesiredSpeed) : maxDesiredSpeed;
+            var speedLimit =
+                desiredSpeed > 0.0f ? Mathf.Min(desiredSpeed, maxDesiredSpeed) : maxDesiredSpeed;
 
             // Only apply braking if there is no acceleration (input == zero || acceleration == 0)
 
             var deltaTime = Time.deltaTime;
 
-            var desiredDirection = desiredSpeed > 0.0f ? desiredVelocity / desiredSpeed : Vector3.zero;
+            var desiredDirection =
+                desiredSpeed > 0.0f ? desiredVelocity / desiredSpeed : Vector3.zero;
             var desiredAcceleration = desiredDirection * (acceleration * deltaTime);
 
             if (desiredAcceleration.isZero() || v.isExceeding(speedLimit))
@@ -1265,7 +1360,9 @@ namespace ECM.Components
             {
                 // Friction (grip / snappy)
 
-                v = v - (v - desiredDirection * v.magnitude) * Mathf.Min(friction * deltaTime, 1.0f);
+                v =
+                    v
+                    - (v - desiredDirection * v.magnitude) * Mathf.Min(friction * deltaTime, 1.0f);
 
                 // Acceleration
 
@@ -1296,18 +1393,38 @@ namespace ECM.Components
         /// <param name="brakingFriction">Friction coefficient to be applied when braking.</param>
         /// <param name="onlyLateral">Should velocity along the y-axis be ignored?</param>
 
-        private void ApplyMovement(Vector3 desiredVelocity, float maxDesiredSpeed, float acceleration,
-            float deceleration, float friction, float brakingFriction, bool onlyLateral)
+        private void ApplyMovement(
+            Vector3 desiredVelocity,
+            float maxDesiredSpeed,
+            float acceleration,
+            float deceleration,
+            float friction,
+            float brakingFriction,
+            bool onlyLateral
+        )
         {
             if (isGrounded)
             {
-                ApplyGroundMovement(desiredVelocity, maxDesiredSpeed, acceleration, deceleration, friction,
-                    brakingFriction);
+                ApplyGroundMovement(
+                    desiredVelocity,
+                    maxDesiredSpeed,
+                    acceleration,
+                    deceleration,
+                    friction,
+                    brakingFriction
+                );
             }
             else
             {
-                ApplyAirMovement(desiredVelocity, maxDesiredSpeed, acceleration, deceleration, friction,
-                    brakingFriction, onlyLateral);
+                ApplyAirMovement(
+                    desiredVelocity,
+                    maxDesiredSpeed,
+                    acceleration,
+                    deceleration,
+                    friction,
+                    brakingFriction,
+                    onlyLateral
+                );
             }
 
             // If moving towards a step,
@@ -1338,7 +1455,8 @@ namespace ECM.Components
         {
             var lateralVelocity = Vector3.ProjectOnPlane(velocity, transform.up);
             if (lateralVelocity.sqrMagnitude > maxLateralSpeed * maxLateralSpeed)
-                cachedRigidbody.velocity += lateralVelocity.normalized * maxLateralSpeed - lateralVelocity;
+                cachedRigidbody.velocity +=
+                    lateralVelocity.normalized * maxLateralSpeed - lateralVelocity;
         }
 
         /// <summary>
@@ -1352,7 +1470,7 @@ namespace ECM.Components
                 return;
 
             var up = transform.up;
-            
+
             var verticalSpeed = Vector3.Dot(velocity, up);
             if (verticalSpeed < -maxFallSpeed)
                 cachedRigidbody.velocity += up * (-maxFallSpeed - verticalSpeed);
@@ -1363,14 +1481,14 @@ namespace ECM.Components
         /// <summary>
         /// Performs character's movement. Causes an instant velocity change to the rigidbody, ignoring its mass.
         /// If useGravity == true will apply custom gravity.
-        /// 
+        ///
         /// Must be called in FixedUpdate.
-        /// 
+        ///
         /// </summary>
         /// <param name="desiredVelocity">Target velocity vector.</param>
         /// <param name="maxDesiredSpeed">Target desired speed.</param>
         /// <param name="onlyLateral">Should velocity along the y-axis be ignored?</param>
-        
+
         public void Move(Vector3 desiredVelocity, float maxDesiredSpeed, bool onlyLateral = true)
         {
             // Perform ground detection
@@ -1396,13 +1514,13 @@ namespace ECM.Components
 
             PreventGroundPenetration();
         }
-        
+
         /// <summary>
         /// Perform character's movement.
         /// If useGravity == true will apply custom gravity.
-        /// 
+        ///
         /// Must be called in FixedUpdate.
-        /// 
+        ///
         /// </summary>
         /// <param name="desiredVelocity">Target velocity vector.</param>
         /// <param name="maxDesiredSpeed">Target desired speed.</param>
@@ -1411,9 +1529,16 @@ namespace ECM.Components
         /// <param name="friction">Friction coefficient to be applied when moving.</param>
         /// <param name="brakingFriction">Friction coefficient to be applied when braking.</param>
         /// <param name="onlyLateral">Should velocity along the y-axis be ignored?</param>
-        
-        public void Move(Vector3 desiredVelocity, float maxDesiredSpeed, float acceleration, float deceleration,
-            float friction, float brakingFriction, bool onlyLateral = true)
+
+        public void Move(
+            Vector3 desiredVelocity,
+            float maxDesiredSpeed,
+            float acceleration,
+            float deceleration,
+            float friction,
+            float brakingFriction,
+            bool onlyLateral = true
+        )
         {
             // Perform ground detection
 
@@ -1421,13 +1546,21 @@ namespace ECM.Components
 
             // Perform character's movement
 
-            ApplyMovement(desiredVelocity, maxDesiredSpeed, acceleration, deceleration, friction, brakingFriction, onlyLateral);
+            ApplyMovement(
+                desiredVelocity,
+                maxDesiredSpeed,
+                acceleration,
+                deceleration,
+                friction,
+                brakingFriction,
+                onlyLateral
+            );
 
             // If enabled, snap to ground
 
             if (snapToGround && isGrounded)
                 SnapToGround();
-            
+
             // Speed Limit
 
             LimitLateralVelocity();
@@ -1442,7 +1575,7 @@ namespace ECM.Components
         /// <summary>
         /// When grounded, modify characters velocity to maintain 'ground'.
         /// </summary>
-        
+
         private void SnapToGround()
         {
             // If distance to 'ground' is ~small, return
@@ -1465,7 +1598,10 @@ namespace ECM.Components
             // On a ledge 'solid' side, compute a 'flattened' snap distance
 
             if (isOnLedgeSolidSide)
-                distanceToGround = Mathf.Max(0.0f, Vector3.Dot(transform.position - groundPoint, transform.up) - groundOffset);
+                distanceToGround = Mathf.Max(
+                    0.0f,
+                    Vector3.Dot(transform.position - groundPoint, transform.up) - groundOffset
+                );
 
             // Compute final snap velocity and update character's velocity
 
@@ -1492,7 +1628,14 @@ namespace ECM.Components
             // Check were is character standing on
 
             GroundHit hitInfo;
-            if (!ComputeGroundHit(probingPosition, probingRotation, out hitInfo, groundDetection.castDistance))
+            if (
+                !ComputeGroundHit(
+                    probingPosition,
+                    probingRotation,
+                    out hitInfo,
+                    groundDetection.castDistance
+                )
+            )
                 return;
 
             // If not on a platform, return
@@ -1519,7 +1662,11 @@ namespace ECM.Components
             // On ledge 'solid' side, compute a flattened snap point
 
             if (hitInfo.isOnLedgeSolidSide)
-                groundedPosition = MathLibrary.ProjectPointOnPlane(groundedPosition, hitInfo.groundPoint, up);
+                groundedPosition = MathLibrary.ProjectPointOnPlane(
+                    groundedPosition,
+                    hitInfo.groundPoint,
+                    up
+                );
 
             // Update character's position
 
@@ -1540,8 +1687,13 @@ namespace ECM.Components
         /// Attempts to snap the character back to 'ground'.
         /// </summary>
 
-        [Obsolete("Rolled back to velocity based snap as this can cause undesired effect under certain cases.")]
-        private void SnapToGround_OBSOLETE(ref Vector3 probingPosition, ref Quaternion probingRotation)
+        [Obsolete(
+            "Rolled back to velocity based snap as this can cause undesired effect under certain cases."
+        )]
+        private void SnapToGround_OBSOLETE(
+            ref Vector3 probingPosition,
+            ref Quaternion probingRotation
+        )
         {
             // If we are leaving ground, return
 
@@ -1551,7 +1703,14 @@ namespace ECM.Components
             // Check were is character standing on
 
             GroundHit hitInfo;
-            if (!ComputeGroundHit(probingPosition, probingRotation, out hitInfo, groundDetection.castDistance) || !hitInfo.isValidGround)
+            if (
+                !ComputeGroundHit(
+                    probingPosition,
+                    probingRotation,
+                    out hitInfo,
+                    groundDetection.castDistance
+                ) || !hitInfo.isValidGround
+            )
                 return;
 
             // If character's is leaving a ledge, do not snap its position to ground
@@ -1572,7 +1731,7 @@ namespace ECM.Components
 
             probingPosition = groundedPosition;
         }
-        
+
         /// <summary>
         /// Coroutine used to simulate a LateFixedUpdate method.
         /// </summary>
@@ -1580,7 +1739,7 @@ namespace ECM.Components
         private IEnumerator LateFixedUpdate()
         {
             var waitTime = new WaitForFixedUpdate();
-            
+
             while (true)
             {
                 yield return waitTime;
@@ -1591,7 +1750,7 @@ namespace ECM.Components
                 var q = transform.rotation;
 
                 OverlapRecovery(ref p, q);
-                
+
                 // Attempt to snap to a moving platform (if any)
 
                 if (isOnGround && isOnPlatform)
@@ -1634,9 +1793,11 @@ namespace ECM.Components
             {
                 Debug.LogError(
                     string.Format(
-                        "CharacterMovement: No 'GroundDetection' found for '{0}' game object.\n" +
-                        "Please add a 'GroundDetection' component to '{0}' game object",
-                        name));
+                        "CharacterMovement: No 'GroundDetection' found for '{0}' game object.\n"
+                            + "Please add a 'GroundDetection' component to '{0}' game object",
+                        name
+                    )
+                );
 
                 return;
             }
@@ -1648,13 +1809,15 @@ namespace ECM.Components
             {
                 Debug.LogError(
                     string.Format(
-                        "CharacterMovement: No 'Rigidbody' found for '{0}' game object.\n" +
-                        "Please add a 'Rigidbody' component to '{0}' game object",
-                        name));
+                        "CharacterMovement: No 'Rigidbody' found for '{0}' game object.\n"
+                            + "Please add a 'Rigidbody' component to '{0}' game object",
+                        name
+                    )
+                );
 
                 return;
             }
-            
+
             cachedRigidbody.useGravity = false;
             cachedRigidbody.isKinematic = false;
             cachedRigidbody.freezeRotation = true;
@@ -1682,9 +1845,11 @@ namespace ECM.Components
 
             Debug.LogWarning(
                 string.Format(
-                    "CharacterMovement: No 'PhysicMaterial' found for '{0}'s Collider, a frictionless one has been created and assigned.\n" +
-                    "Please add a Frictionless 'PhysicMaterial' to '{0}' game object.",
-                    name));
+                    "CharacterMovement: No 'PhysicMaterial' found for '{0}'s Collider, a frictionless one has been created and assigned.\n"
+                        + "Please add a Frictionless 'PhysicMaterial' to '{0}' game object.",
+                    name
+                )
+            );
         }
 
         public void OnEnable()

@@ -9,9 +9,11 @@ public class ToyToCraft
 {
     int id;
     GameObject go;
-    bool current;
+    public bool current { get; private set; }
     int totalRequired;
     int currentKills;
+    int killsAtTimeOfSettingCurrent;
+    Image background;
     Image icon;
     TextMeshProUGUI text;
 
@@ -23,12 +25,30 @@ public class ToyToCraft
     public GameObject GameObject
     {
         get { return go; }
-        set { go = value; }
+        set
+        {
+            go = value;
+            background = value.GetComponent<Image>();
+            icon = value.GetComponentsInChildren<Image>()[1];
+            text = value.GetComponentInChildren<TextMeshProUGUI>();
+            text.gameObject.SetActive(false);
+            icon.sprite = GameManager.Instance.Anvil.UI.toyIcons[id];
+        }
     }
 
     public int ID
     {
         get { return id; }
+    }
+
+    public void MakeCurrent()
+    {
+        current = true;
+        killsAtTimeOfSettingCurrent = GameManager.Instance.Kills;
+        totalRequired = Random.Range(2, 10);
+        background.color = GameManager.Instance.Anvil.UI.selectedColor;
+        text.text = string.Format("{0}/{1}", currentKills, totalRequired);
+        text.gameObject.SetActive(true);
     }
 }
 
@@ -74,7 +94,10 @@ public class Anvil : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Player");
+            if (other.GetComponent<Rigidbody>().isKinematic)
+            {
+                return;
+            }
             PopupManager.Instance.ShowPickupMessage("E", KeyCode.E, UI.ShowUI);
         }
     }
