@@ -43,13 +43,19 @@ public class AnvilUI : MonoBehaviour
 
     public void UpdateToyList()
     {
-        var io = GameManager.Instance.Anvil.ToysToCraft;
-        foreach (ToyToCraft t in io)
+        var toys = GameManager.Instance.Anvil.ToysToCraft;
+        for (int i = 0; i < toys.Count; i++)
         {
-            if (t.GameObject == null)
+            if (toys[i].GameObject == null)
             {
                 GameObject temp = Instantiate(toyToCraftUIPrefab, toyToCraftParent.transform);
-                t.GameObject = temp;
+                toys[i].GameObject = temp;
+            }
+            toys[i].UpdateUI();
+            if (!toys[i].GameObject.activeSelf)
+            {
+                Destroy(toys[i].GameObject);
+                toys.Remove(toys[i]);
             }
         }
         CheckToys();

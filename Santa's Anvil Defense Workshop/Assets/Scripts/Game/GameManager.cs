@@ -1,15 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public int CountdownTime;
+    public int spawnDelay;
+    public int spawnRate;
+    GameObject[] spawnPoints;
+    public GameObject enemyPrefab;
     Anvil anvil;
+    float nextSpawn;
+    int _kills;
 
-    int kills = 0;
+    public int kills
+    {
+        get { return _kills; }
+        set
+        {
+            _kills = value;
+            anvil.UI.UpdateToyList();
+        }
+    }
 
     private void Awake()
     {
@@ -17,11 +28,30 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
+        nextSpawn = Time.time + spawnDelay;
     }
 
-    public int Kills
+    private void Update()
     {
-        get { return kills; }
+        if (nextSpawn < Time.time)
+        {
+            Spawn();
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            kills++;
+        }
+    }
+
+    private void Spawn()
+    {
+        Instantiate(
+            enemyPrefab,
+            spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position,
+            Quaternion.identity
+        );
+        nextSpawn = Time.time + spawnRate;
     }
 
     public Anvil Anvil

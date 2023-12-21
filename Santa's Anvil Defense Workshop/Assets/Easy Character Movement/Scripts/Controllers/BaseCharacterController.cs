@@ -7,7 +7,7 @@ namespace ECM.Controllers
 {
     /// <summary>
     /// Base Character Controller.
-    /// 
+    ///
     /// A general purpose character controller and base of other controllers.
     /// It handles keyboard input, and allows for a variable height jump, however this default behaviour
     /// can easily be modified or completely replaced overriding this related methods in a derived class.
@@ -35,18 +35,23 @@ namespace ECM.Controllers
         private float _deceleration = 20.0f;
 
         [Tooltip(
-            "Setting that affects movement control. Higher values allow faster changes in direction.\n" +
-            "If useBrakingFriction is false, this also affects the ability to stop more quickly when braking.")]
+            "Setting that affects movement control. Higher values allow faster changes in direction.\n"
+                + "If useBrakingFriction is false, this also affects the ability to stop more quickly when braking."
+        )]
         [SerializeField]
         private float _groundFriction = 8f;
 
-        [Tooltip("Should brakingFriction be used to slow the character? " +
-                 "If false, groundFriction will be used.")]
+        [Tooltip(
+            "Should brakingFriction be used to slow the character? "
+                + "If false, groundFriction will be used."
+        )]
         [SerializeField]
         private bool _useBrakingFriction;
 
-        [Tooltip("Friction coefficient applied when braking (when there is no input acceleration).\n" +
-                 "Only used if useBrakingFriction is true, otherwise groundFriction is used.")]
+        [Tooltip(
+            "Friction coefficient applied when braking (when there is no input acceleration).\n"
+                + "Only used if useBrakingFriction is true, otherwise groundFriction is used."
+        )]
         [SerializeField]
         private float _brakingFriction = 8f;
 
@@ -54,8 +59,10 @@ namespace ECM.Controllers
         [SerializeField]
         private float _airFriction;
 
-        [Tooltip("When not grounded, the amount of lateral movement control available to the character.\n" +
-                 "0 - no control, 1 - full control.")]
+        [Tooltip(
+            "When not grounded, the amount of lateral movement control available to the character.\n"
+                + "0 - no control, 1 - full control."
+        )]
         [Range(0.0f, 1.0f)]
         [SerializeField]
         private float _airControl = 0.2f;
@@ -82,19 +89,25 @@ namespace ECM.Controllers
         [SerializeField]
         private float _extraJumpTime = 0.5f;
 
-        [Tooltip("Acceleration while jump button is held down, given in meters / sec^2."+
-                 "As rule of thumb, configure it to your character's gravity.")]
+        [Tooltip(
+            "Acceleration while jump button is held down, given in meters / sec^2."
+                + "As rule of thumb, configure it to your character's gravity."
+        )]
         [SerializeField]
         private float _extraJumpPower = 25.0f;
 
         [FormerlySerializedAs("_jumpToleranceTime")]
-        [Tooltip("How early before hitting the ground you can press jump, and still perform the jump.\n" +
-                 "Typical values goes from 0.15f to 0.5f.")]
+        [Tooltip(
+            "How early before hitting the ground you can press jump, and still perform the jump.\n"
+                + "Typical values goes from 0.15f to 0.5f."
+        )]
         [SerializeField]
         private float _jumpPreGroundedToleranceTime = 0.15f;
 
-        [Tooltip("How long after leaving the ground you can press jump, and still perform the jump." +
-                 "Typical values goes from 0.15f to 0.5f.")]
+        [Tooltip(
+            "How long after leaving the ground you can press jump, and still perform the jump."
+                + "Typical values goes from 0.15f to 0.5f."
+        )]
         [SerializeField]
         private float _jumpPostGroundedToleranceTime = 0.15f;
 
@@ -103,13 +116,17 @@ namespace ECM.Controllers
         private float _maxMidAirJumps = 1;
 
         [Header("Animation")]
-        [Tooltip("Should use root motion?\n" +
-                 "This requires a 'RootMotionController' attached to the 'Animator' game object.")]
+        [Tooltip(
+            "Should use root motion?\n"
+                + "This requires a 'RootMotionController' attached to the 'Animator' game object."
+        )]
         [SerializeField]
         private bool _useRootMotion;
 
-        [Tooltip("Should root motion handle character rotation?\n" +
-                 "This requires a 'RootMotionController' attached to the 'Animator' game object.")]
+        [Tooltip(
+            "Should root motion handle character rotation?\n"
+                + "This requires a 'RootMotionController' attached to the 'Animator' game object."
+        )]
         [SerializeField]
         private bool _rootMotionRotation;
 
@@ -131,7 +148,7 @@ namespace ECM.Controllers
         protected int _midAirJumpCount;
 
         private bool _allowVerticalMovement;
-        
+
         private bool _restoreVelocityOnResume = true;
 
         #endregion
@@ -236,9 +253,9 @@ namespace ECM.Controllers
         }
 
         /// <summary>
-        /// Friction applied when braking (eg: when there is no input acceleration).  
+        /// Friction applied when braking (eg: when there is no input acceleration).
         /// Only used if useBrakingFriction is true, otherwise groundFriction is used.
-        /// 
+        ///
         /// Braking is composed of friction (velocity dependent drag) and constant deceleration.
         /// </summary>
 
@@ -250,7 +267,7 @@ namespace ECM.Controllers
 
         /// <summary>
         /// Friction applied when not grounded (eg: falling, flying, etc).
-        /// If useBrakingFriction is false, this also affects the ability to stop more quickly when braking while in air. 
+        /// If useBrakingFriction is false, this also affects the ability to stop more quickly when braking while in air.
         /// </summary>
 
         public float airFriction
@@ -516,7 +533,7 @@ namespace ECM.Controllers
         {
             if (pause && !isPaused)
             {
-                // Pause 
+                // Pause
 
                 movement.Pause(true);
                 isPaused = true;
@@ -599,9 +616,9 @@ namespace ECM.Controllers
             if (!movement.isGrounded && _jumpUngroundedTimer > _jumpPostGroundedToleranceTime)
                 return;
 
-            _canJump = false;           // Halt jump until jump button is released
-            _isJumping = true;          // Update isJumping flag
-            _updateJumpTimer = true;    // Allow mid-air jump to be variable height
+            _canJump = false; // Halt jump until jump button is released
+            _isJumping = true; // Update isJumping flag
+            _updateJumpTimer = true; // Allow mid-air jump to be variable height
 
             // Prevent _jumpPostGroundedToleranceTime condition to pass until character become grounded again (_jumpUngroundedTimer reseted).
 
@@ -642,11 +659,11 @@ namespace ECM.Controllers
             if (_midAirJumpCount >= _maxMidAirJumps)
                 return;
 
-            _midAirJumpCount++;         // Increase mid-air jumps counter
+            _midAirJumpCount++; // Increase mid-air jumps counter
 
-            _canJump = false;           // Halt jump until jump button is released
-            _isJumping = true;          // Update isJumping flag
-            _updateJumpTimer = true;    // Allow mid-air jump to be variable height
+            _canJump = false; // Halt jump until jump button is released
+            _isJumping = true; // Update isJumping flag
+            _updateJumpTimer = true; // Allow mid-air jump to be variable height
 
             // Apply jump impulse
 
@@ -696,7 +713,7 @@ namespace ECM.Controllers
         /// <summary>
         /// Handle character's Crouch / UnCrouch.
         /// </summary>
-        
+
         protected virtual void Crouch()
         {
             // If crouching behaviour is disabled, return
@@ -764,7 +781,7 @@ namespace ECM.Controllers
 
         /// <summary>
         /// Perform character movement logic.
-        /// 
+        ///
         /// NOTE: Must be called in FixedUpdate.
         /// </summary>
 
@@ -786,12 +803,19 @@ namespace ECM.Controllers
                 var currentFriction = isGrounded ? groundFriction : airFriction;
                 var currentBrakingFriction = useBrakingFriction ? brakingFriction : currentFriction;
 
-                movement.Move(desiredVelocity, speed, acceleration, deceleration, currentFriction,
-                    currentBrakingFriction, !allowVerticalMovement);
+                movement.Move(
+                    desiredVelocity,
+                    speed,
+                    acceleration,
+                    deceleration,
+                    currentFriction,
+                    currentBrakingFriction,
+                    !allowVerticalMovement
+                );
             }
 
             // Jump logic
-            
+
             Jump();
             MidAirJump();
             UpdateJumpTimer();
@@ -819,7 +843,7 @@ namespace ECM.Controllers
             if (useRootMotion && applyRootMotion && useRootMotionRotation)
             {
                 // Use animation rotation to rotate our character
-                
+
                 movement.rotation *= animator.deltaRotation;
             }
             else
@@ -862,9 +886,9 @@ namespace ECM.Controllers
 
         /// <summary>
         /// Validate editor exposed fields.
-        /// 
+        ///
         /// NOTE: If you override this, it is important to call the parent class' version of method
-        /// eg: base.OnValidate, in the derived class method implementation, in order to fully validate the class.  
+        /// eg: base.OnValidate, in the derived class method implementation, in order to fully validate the class.
         /// </summary>
 
         public virtual void OnValidate()
@@ -895,9 +919,9 @@ namespace ECM.Controllers
 
         /// <summary>
         /// Initialize this component.
-        /// 
+        ///
         /// NOTE: If you override this, it is important to call the parent class' version of method,
-        /// (eg: base.Awake) in the derived class method implementation, in order to fully initialize the class. 
+        /// (eg: base.Awake) in the derived class method implementation, in order to fully initialize the class.
         /// </summary>
 
         public virtual void Awake()
@@ -951,7 +975,7 @@ namespace ECM.Controllers
 
             Animate();
         }
-        
+
         #endregion
     }
 }

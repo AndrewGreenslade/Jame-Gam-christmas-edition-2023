@@ -5,11 +5,11 @@ namespace ECM.Controllers
 {
     /// <summary>
     /// Base Agent (NavMesh) Controller.
-    /// 
+    ///
     /// Base class for a 'NavMeshAgent' controlled characters.
     /// It inherits from 'BaseCharacterController' and extends it to control a 'NavMeshAgent'
     /// and intelligently move in response to mouse click (click to move).
-    /// 
+    ///
     /// As the base character controller, this default behaviour can easily be modified completely replaced in a derived class.
     /// </summary>
 
@@ -18,8 +18,10 @@ namespace ECM.Controllers
         #region EDITOR EXPOSED FIELDS
 
         [Header("Navigation")]
-        [Tooltip("Should the agent brake automatically to avoid overshooting the destination point? \n" +
-                 "If this property is set to true, the agent will brake automatically as it nears the destination.")]
+        [Tooltip(
+            "Should the agent brake automatically to avoid overshooting the destination point? \n"
+                + "If this property is set to true, the agent will brake automatically as it nears the destination."
+        )]
         [SerializeField]
         private bool _autoBraking = true;
 
@@ -33,8 +35,7 @@ namespace ECM.Controllers
 
         [Tooltip("Layers to be considered as ground (walkables). Used by ground click detection.")]
         [SerializeField]
-        public LayerMask groundMask = 1;            // Default layer
-
+        public LayerMask groundMask = 1; // Default layer
         #endregion
 
         #region PROPERTIES
@@ -85,7 +86,9 @@ namespace ECM.Controllers
                 if (!autoBraking || agent == null)
                     return 1f;
 
-                return agent.hasPath ? Mathf.Clamp(agent.remainingDistance / brakingDistance, 0.1f, 1f) : 1f;
+                return agent.hasPath
+                    ? Mathf.Clamp(agent.remainingDistance / brakingDistance, 0.1f, 1f)
+                    : 1f;
             }
         }
 
@@ -112,7 +115,7 @@ namespace ECM.Controllers
         /// <summary>
         /// Synchronize the NavMesh Agent simulation position with the character movement position,
         /// we control the agent.
-        /// 
+        ///
         /// NOTE: Must be called in LateUpdate method.
         /// </summary>
 
@@ -149,7 +152,7 @@ namespace ECM.Controllers
             {
                 // If destination is reached,
                 // reset stop agent and clear its path
-                
+
                 agent.ResetPath();
             }
         }
@@ -184,21 +187,21 @@ namespace ECM.Controllers
 
             // Handle mouse input
 
-            if (!Input.GetButton("Fire2"))
-                return;
+            // if (!Input.GetButton("Fire2"))
+            //     return;
 
-            // If mouse right click,
-            // found click position in the world
+            // // If mouse right click,
+            // // found click position in the world
 
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            RaycastHit hitInfo;
-            if (!Physics.Raycast(ray, out hitInfo, Mathf.Infinity, groundMask.value))
-                return;
+            // RaycastHit hitInfo;
+            // if (!Physics.Raycast(ray, out hitInfo, Mathf.Infinity, groundMask.value))
+            //     return;
 
-            // Set agent destination to ground hit point
+            // // Set agent destination to ground hit point
 
-            agent.SetDestination(hitInfo.point);
+            // agent.SetDestination(hitInfo.point);
         }
 
         #endregion
@@ -253,9 +256,11 @@ namespace ECM.Controllers
             {
                 Debug.LogError(
                     string.Format(
-                        "NavMeshAgentCharacterController: There is no 'NavMeshAgent' attached to the '{0}' game object.\n" +
-                        "Please add a 'NavMeshAgent' to the '{0}' game object.",
-                        name));
+                        "NavMeshAgentCharacterController: There is no 'NavMeshAgent' attached to the '{0}' game object.\n"
+                            + "Please add a 'NavMeshAgent' to the '{0}' game object.",
+                        name
+                    )
+                );
             }
         }
 

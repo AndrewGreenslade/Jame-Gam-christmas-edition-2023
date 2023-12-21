@@ -44,11 +44,27 @@ public class ToyToCraft
     public void MakeCurrent()
     {
         current = true;
-        killsAtTimeOfSettingCurrent = GameManager.Instance.Kills;
+        killsAtTimeOfSettingCurrent = GameManager.Instance.kills;
         totalRequired = Random.Range(2, 10);
         background.color = GameManager.Instance.Anvil.UI.selectedColor;
         text.text = string.Format("{0}/{1}", currentKills, totalRequired);
         text.gameObject.SetActive(true);
+    }
+
+    public void UpdateUI()
+    {
+        if (!current)
+        {
+            return;
+        }
+        currentKills = GameManager.Instance.kills - killsAtTimeOfSettingCurrent;
+
+        if (currentKills >= totalRequired)
+        {
+            go.SetActive(false);
+        }
+
+        text.text = string.Format("{0}/{1}", currentKills, totalRequired);
     }
 }
 
