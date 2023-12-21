@@ -5,7 +5,6 @@ Thing we need to make with anvil:
 		doll
 
 Usable Items:
-	Bauble launcher
 	toy gun (Green army soldier style)
 	Not so nerf gun
 	
