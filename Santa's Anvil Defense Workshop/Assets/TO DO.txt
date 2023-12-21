@@ -1,0 +1,17 @@
+Usable Items:
+	Not so nerf gun
+	
+TO DO:
+	MAP
+	Logic for grinch
+	proper Grinxh Model
+	Win loose condition
+	Weapon scripts
+	
+
+Random decoration assets:
+
+	Present
+	Table
+	Christmas Tree
+	
