@@ -9,9 +9,10 @@ TO DO:
 
 Random decoration assets:
 
-	Present
 	Table
-	Christmas Tree
+	baubles
+	icicles celling
+
 
 Animations:
 
