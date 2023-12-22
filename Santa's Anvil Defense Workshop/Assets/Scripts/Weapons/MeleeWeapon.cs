@@ -33,7 +33,6 @@ public class MeleeWeapon : MonoBehaviour
             )
         )
         {
-            Debug.Log(hit.transform.name);
             if (hit.transform.tag == "Enemy")
             {
                 hit.transform.GetComponent<Enemy>().TakeDamage(damage);

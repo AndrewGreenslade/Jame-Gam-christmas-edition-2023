@@ -74,6 +74,7 @@ public class Anvil : MonoBehaviour
     List<ToyToCraft> toysToCraft = new List<ToyToCraft>();
 
     float countdown;
+    public int health = 100;
 
     private void Start()
     {
@@ -93,6 +94,11 @@ public class Anvil : MonoBehaviour
             toysToCraft.Add(new ToyToCraft(Random.Range(0, 3)));
             GameManager.Instance.anvilUI.UpdateToyList();
         }
+    }
+
+    public void DealDamage(int damage)
+    {
+        health -= damage;
     }
 
     public List<ToyToCraft> ToysToCraft

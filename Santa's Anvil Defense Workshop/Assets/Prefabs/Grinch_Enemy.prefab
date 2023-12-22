@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6715377244910864528}
   - component: {fileID: 2225686142431537371}
   - component: {fileID: 5640330384027699209}
+  - component: {fileID: 373416126806533708}
   m_Layer: 0
   m_Name: Grinch_Enemy
   m_TagString: Enemy
@@ -55,7 +56,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -189,7 +190,7 @@ MonoBehaviour:
   _rootMotionRotation: 0
   _autoBraking: 1
   _brakingDistance: 2
-  _stoppingDistance: 2
+  _stoppingDistance: 3
   groundMask:
     serializedVersion: 2
     m_Bits: 1
@@ -208,6 +209,9 @@ MonoBehaviour:
   agent: {fileID: 1742454291902611418}
   model: {fileID: 4732778122801057167}
   ragdoll: {fileID: 6561448295930655122}
+  anim: {fileID: 5640330384027699209}
+  damage: 10
+  attackRate: 3
 --- !u!95 &5640330384027699209
 Animator:
   serializedVersion: 7
@@ -230,6 +234,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &373416126806533708
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745568796190711216}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 3}
+  m_Center: {x: 0, y: 1, z: 1}
 --- !u!1001 &965155049662533000
 PrefabInstance:
   m_ObjectHideFlags: 0

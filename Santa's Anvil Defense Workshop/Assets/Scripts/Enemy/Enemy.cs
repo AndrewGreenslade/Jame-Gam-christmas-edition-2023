@@ -9,6 +9,11 @@ public class Enemy : MonoBehaviour
     Transform currentTarget;
     public GameObject model;
     public GameObject ragdoll;
+    public Animator anim;
+
+    public int damage;
+    public float attackRate;
+    float nextAttack;
 
     int health = 100;
 
@@ -35,6 +40,16 @@ public class Enemy : MonoBehaviour
         {
             currentTarget = BaseFirstPersonController.Instance.transform;
         }
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            anim.SetBool("Stopped", true);
+        }
+        else
+        {
+            anim.SetBool("Stopped", false);
+        }
+
         StartCoroutine(CheckClosest());
     }
 
@@ -44,6 +59,7 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
+        anim.SetTrigger("DamageTaken");
         health -= damage;
         if (health <= 0)
         {
@@ -52,6 +68,25 @@ public class Enemy : MonoBehaviour
             //Do death animation?
             GameManager.Instance.kills++;
             Destroy(gameObject, 5);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (nextAttack < Time.time)
+        {
+            if (other.tag == "Anvil")
+            {
+                GameManager.Instance.Anvil.DealDamage(1);
+                anim.SetTrigger("Attack");
+                nextAttack = Time.time + attackRate;
+            }
+            else if (other.tag == "Player")
+            {
+                other.GetComponent<Player>().DealDamage(damage);
+                anim.SetTrigger("Attack");
+                nextAttack = Time.time + attackRate;
+            }
         }
     }
 }
