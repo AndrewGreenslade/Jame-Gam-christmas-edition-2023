@@ -15,6 +15,11 @@ public class Weapon : MonoBehaviour
     public int currentAmmo;
     bool reloading;
 
+    private void Start()
+    {
+        currentAmmo = magSize;
+    }
+
     private void Update()
     {
         if (Input.GetKey(KeyCode.Mouse0) && !reloading)
