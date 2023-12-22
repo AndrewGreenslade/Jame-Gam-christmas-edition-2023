@@ -21,7 +21,6 @@ public class MeleeWeapon : MonoBehaviour
 
     void CheckHit()
     {
-        Debug.Log("Hitting");
         RaycastHit hit;
         if (
             Physics.Raycast(
@@ -34,7 +33,6 @@ public class MeleeWeapon : MonoBehaviour
         {
             if (hit.transform.tag == "Enemy")
             {
-                Debug.Log("Hitting Enemy");
                 hit.transform.GetComponent<Enemy>().TakeDamage(damage);
             }
         }

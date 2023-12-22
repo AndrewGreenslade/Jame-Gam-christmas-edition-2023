@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 {
     public NavMeshAgent agent;
     Transform currentTarget;
+    public GameObject model;
+    public GameObject ragdoll;
 
     int health = 100;
 
@@ -41,9 +43,11 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            model.SetActive(false);
+            ragdoll.SetActive(true);
             //Do death animation?
             GameManager.Instance.kills++;
-            Destroy(gameObject);
+            Destroy(gameObject, 5);
         }
     }
 }
