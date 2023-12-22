@@ -408,9 +408,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 4027361001148150724}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7152484713876627639}
+  - {fileID: 7366593952175947779}
+  - {fileID: 7928964696813812887}
 --- !u!114 &774441900082222668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1354,11 +1354,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5572b827f4694404a8a195392dd66717,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6072909789141114830}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5572b827f4694404a8a195392dd66717,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5684427229066897198}
+      addedObject: {fileID: 4371168085368322297}
   m_SourcePrefab: {fileID: 100100000, guid: 5572b827f4694404a8a195392dd66717, type: 3}
 --- !u!1 &4027361001148150724 stripped
 GameObject:
@@ -1366,7 +1362,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4261925528404971157}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6072909789141114830
+--- !u!114 &4371168085368322297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1380,24 +1376,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swayMultiplier: 8
   smooth: 2
---- !u!114 &5684427229066897198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4027361001148150724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7c394df8c1555749b60908d2b22089c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 50
-  attackRate: 0.2
-  attackRange: 5
-  mask:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!4 &4372959858467678590 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5572b827f4694404a8a195392dd66717,
@@ -1525,7 +1503,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2f688473bf1cbcc448620bc062fca028,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6014369564814052059, guid: 2f688473bf1cbcc448620bc062fca028,
         type: 3}
@@ -1559,6 +1537,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6091597388657609203}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2f688473bf1cbcc448620bc062fca028,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4448866249471012218}
   m_SourcePrefab: {fileID: 100100000, guid: 2f688473bf1cbcc448620bc062fca028, type: 3}
 --- !u!4 &7296543661981132333 stripped
 Transform:
@@ -1600,6 +1582,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4448866249471012218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7928964696813812887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97fe8e7d14f8fa45accbfb3d9b125fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  fireRate: 0.2
+  magSize: 32
+  reloadTime: 1
+  anim: {fileID: 6091597388657609203}
+  currentAmmo: 0
 --- !u!1001 &7708491281029152082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2200,6 +2200,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4647628134218391078}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2f688473bf1cbcc448620bc062fca028,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9087306125292015348}
   m_SourcePrefab: {fileID: 100100000, guid: 2f688473bf1cbcc448620bc062fca028, type: 3}
 --- !u!1 &7152484713876627639 stripped
 GameObject:
@@ -2229,6 +2233,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9087306125292015348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7152484713876627639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7c394df8c1555749b60908d2b22089c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 50
+  attackRate: 0.2
+  attackRange: 5
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!4 &7264580731087381453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8407329293443105237, guid: 2f688473bf1cbcc448620bc062fca028,
