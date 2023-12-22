@@ -67,13 +67,14 @@ public class Enemy : MonoBehaviour
             ragdoll.SetActive(true);
             //Do death animation?
             GameManager.Instance.kills++;
+            gameObject.layer = 2;
             Destroy(gameObject, 5);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (nextAttack < Time.time)
+        if (nextAttack < Time.time && health > 0)
         {
             if (other.tag == "Anvil")
             {

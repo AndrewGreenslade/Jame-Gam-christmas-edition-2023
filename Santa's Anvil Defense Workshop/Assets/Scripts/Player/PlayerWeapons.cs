@@ -30,12 +30,10 @@ public class PlayerWeapons : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             SwitchWeapons(10);
-            Debug.Log("Up");
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
             SwitchWeapons(-10);
-            Debug.Log("Down");
         }
     }
 

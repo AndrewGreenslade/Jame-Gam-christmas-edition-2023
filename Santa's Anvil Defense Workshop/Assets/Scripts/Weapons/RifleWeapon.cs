@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class RifleWeapon : Weapon
 {
+    public LayerMask mask;
+    public int burstAmount;
     public override void Shoot()
     {
         RaycastHit hit;
-        if (
-            Physics.Raycast(
-                Camera.main.transform.position,
-                Camera.main.transform.forward,
-                out hit
-            )
-        )
+        for (int i = 0; i < burstAmount; i++)
         {
-            if (hit.transform.tag == "Enemy")
+            currentAmmo--;
+            if (
+                Physics.Raycast(
+                    Camera.main.transform.position,
+                    Camera.main.transform.forward,
+                    out hit, maxDistance, mask
+                )
+            )
             {
-                hit.transform.GetComponent<Enemy>().TakeDamage(damage);
+                if (hit.transform.tag == "Enemy")
+                {
+                    hit.transform.GetComponent<Enemy>().TakeDamage(damage);
+                }
             }
         }
     }

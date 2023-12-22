@@ -76,6 +76,8 @@ public class Anvil : MonoBehaviour
     float countdown;
     public int health = 100;
 
+    public int toysCount { get { return toysToCraft.Count; } }
+
     private void Start()
     {
         GameManager.Instance.Anvil = this;

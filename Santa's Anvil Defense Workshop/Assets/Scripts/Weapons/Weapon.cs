@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     public float fireRate;
     public int magSize;
     public float reloadTime;
+    public float maxDistance;
     public Animator anim;
     float nextFire;
     [HideInInspector]
@@ -23,7 +24,6 @@ public class Weapon : MonoBehaviour
                 if (currentAmmo > 0)
                 {
                     anim.SetBool("Shooting", true);
-                    currentAmmo--;
                     Shoot();
                 }
                 else
@@ -50,6 +50,7 @@ public class Weapon : MonoBehaviour
     public virtual void Shoot()
     {
         Debug.Log("Did not implement shooting for this weapon.");
+        currentAmmo--;
     }
 
     IEnumerator Reload()

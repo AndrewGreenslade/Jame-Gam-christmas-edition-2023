@@ -5,7 +5,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public int CountdownTime;
     public int spawnDelay;
-    public int spawnRate;
+    public float spawnRate;
+    public bool hardmode;
     GameObject[] spawnPoints;
     public GameObject enemyPrefab;
     Anvil anvil;
@@ -49,11 +50,12 @@ public class GameManager : MonoBehaviour
 
     private void Spawn()
     {
-        Instantiate(
+        var temp = Instantiate(
             enemyPrefab,
             spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position,
             Quaternion.identity
         );
+        temp.name = string.Format("Grinch '{0}'", Random.Range(0, 10000));
         nextSpawn = Time.time + spawnRate;
     }
 
