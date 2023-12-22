@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class PlayerWeapons : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject[] weapons;
 
-    // Update is called once per frame
-    void Update()
+    int currentWeaponIndex;
+
+    private void Start()
     {
-        
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            if (i != currentWeaponIndex)
+            {
+                weapons[i].SetActive(false);
+            }
+            else
+            {
+                weapons[i].SetActive(true);
+            }
+        }
     }
 }

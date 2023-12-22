@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     GameObject[] spawnPoints;
     public GameObject enemyPrefab;
     Anvil anvil;
+
+    [HideInInspector]
+    public AnvilUI anvilUI;
     float nextSpawn;
     int _kills;
 
@@ -18,7 +21,7 @@ public class GameManager : MonoBehaviour
         set
         {
             _kills = value;
-            anvil.UI.UpdateToyList();
+            anvilUI.UpdateToyList();
         }
     }
 

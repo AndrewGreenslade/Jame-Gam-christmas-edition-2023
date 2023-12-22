@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent;
     Transform currentTarget;
 
+    int health = 100;
+
     private void Awake()
     {
         currentTarget = GameManager.Instance.Anvil.transform;
@@ -32,5 +34,16 @@ public class Enemy : MonoBehaviour
             currentTarget = BaseFirstPersonController.Instance.transform;
         }
         StartCoroutine(CheckClosest());
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            //Do death animation?
+            GameManager.Instance.kills++;
+            Destroy(gameObject);
+        }
     }
 }

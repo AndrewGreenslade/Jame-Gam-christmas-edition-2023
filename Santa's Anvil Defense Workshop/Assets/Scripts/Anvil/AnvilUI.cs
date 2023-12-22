@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ECM.Controllers;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,13 @@ public class AnvilUI : MonoBehaviour
     public Color defaultColor;
     public Color disabledColor;
 
+    float openTime;
     bool open;
+
+    private void Start()
+    {
+        GameManager.Instance.anvilUI = this;
+    }
 
     public void CheckToys()
     {
@@ -67,9 +74,32 @@ public class AnvilUI : MonoBehaviour
         {
             countdown.text = GameManager.Instance.Anvil.Countdown;
         }
-        if (open && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)))
+        if (
+            open
+            && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape))
+            && openTime < Time.time
+        )
         {
             HideUI();
+        }
+        if (open)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                ToySelected(0);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                ToySelected(1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                ToySelected(2);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                ToySelected(3);
+            }
         }
     }
 
@@ -97,10 +127,11 @@ public class AnvilUI : MonoBehaviour
 
     public void ShowUI()
     {
+        open = true;
+        openTime = Time.time + 1;
         CheckToys();
         toySelectionUI.SetActive(true);
         BaseFirstPersonController.Instance.pause = true;
         BaseFirstPersonController.Instance.mouseLook.SetCursorLock(false);
-        open = true;
     }
 }

@@ -32,7 +32,7 @@ public class ToyToCraft
             icon = value.GetComponentsInChildren<Image>()[1];
             text = value.GetComponentInChildren<TextMeshProUGUI>();
             text.gameObject.SetActive(false);
-            icon.sprite = GameManager.Instance.Anvil.UI.toyIcons[id];
+            icon.sprite = GameManager.Instance.anvilUI.toyIcons[id];
         }
     }
 
@@ -46,7 +46,7 @@ public class ToyToCraft
         current = true;
         killsAtTimeOfSettingCurrent = GameManager.Instance.kills;
         totalRequired = Random.Range(2, 10);
-        background.color = GameManager.Instance.Anvil.UI.selectedColor;
+        background.color = GameManager.Instance.anvilUI.selectedColor;
         text.text = string.Format("{0}/{1}", currentKills, totalRequired);
         text.gameObject.SetActive(true);
     }
@@ -72,7 +72,6 @@ public class Anvil : MonoBehaviour
 {
     [SerializeField]
     List<ToyToCraft> toysToCraft = new List<ToyToCraft>();
-    public AnvilUI UI;
 
     float countdown;
 
@@ -92,7 +91,7 @@ public class Anvil : MonoBehaviour
         {
             countdown = GameManager.Instance.CountdownTime;
             toysToCraft.Add(new ToyToCraft(Random.Range(0, 3)));
-            UI.UpdateToyList();
+            GameManager.Instance.anvilUI.UpdateToyList();
         }
     }
 
@@ -103,7 +102,7 @@ public class Anvil : MonoBehaviour
 
     public string Countdown
     {
-        get { return string.Format("{0:00}s", Mathf.FloorToInt(countdown % 60)); }
+        get { return string.Format("{0:0}s", Mathf.FloorToInt(countdown % 60)); }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -114,7 +113,11 @@ public class Anvil : MonoBehaviour
             {
                 return;
             }
-            PopupManager.Instance.ShowPickupMessage("E", KeyCode.E, UI.ShowUI);
+            PopupManager.Instance.ShowPickupMessage(
+                "E",
+                KeyCode.E,
+                GameManager.Instance.anvilUI.ShowUI
+            );
         }
     }
 
