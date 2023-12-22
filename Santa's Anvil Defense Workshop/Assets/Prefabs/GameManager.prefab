@@ -47,5 +47,6 @@ MonoBehaviour:
   CountdownTime: 5
   spawnDelay: 5
   spawnRate: 1
-  enemyPrefab: {fileID: 8219753659892897391, guid: 12ed11f8be18b6449b9b57c8fa8922fa,
+  enemyPrefab: {fileID: 3745568796190711216, guid: 60dd72c4731fadf49984c933556a87bc,
     type: 3}
+  anvilUI: {fileID: 0}
