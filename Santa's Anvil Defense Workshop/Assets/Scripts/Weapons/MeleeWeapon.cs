@@ -7,6 +7,7 @@ public class MeleeWeapon : MonoBehaviour
     public int damage;
     public float attackRate;
     public float attackRange;
+    public LayerMask mask;
     float nextAttack;
 
     private void Update()
@@ -27,10 +28,12 @@ public class MeleeWeapon : MonoBehaviour
                 Camera.main.transform.position,
                 Camera.main.transform.forward,
                 out hit,
-                attackRange
+                attackRange,
+                mask
             )
         )
         {
+            Debug.Log(hit.transform.name);
             if (hit.transform.tag == "Enemy")
             {
                 hit.transform.GetComponent<Enemy>().TakeDamage(damage);

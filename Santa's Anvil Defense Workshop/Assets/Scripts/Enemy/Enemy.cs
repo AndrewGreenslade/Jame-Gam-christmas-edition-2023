@@ -40,6 +40,10 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (health <= 0)
+        {
+            return;
+        }
         health -= damage;
         if (health <= 0)
         {

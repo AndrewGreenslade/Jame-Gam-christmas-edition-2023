@@ -520,7 +520,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 1271
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1137,6 +1137,9 @@ MonoBehaviour:
   damage: 50
   attackRate: 0.2
   attackRange: 5
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!4 &4372959858467678590 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5572b827f4694404a8a195392dd66717,
