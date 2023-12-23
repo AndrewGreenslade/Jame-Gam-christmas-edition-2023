@@ -301,7 +301,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyPrefab
       value: 
-      objectReference: {fileID: 3745568796190711216, guid: 60dd72c4731fadf49984c933556a87bc,
+      objectReference: {fileID: 5892278404825385362, guid: 193b4971ff61635449c8782d6b289334,
         type: 3}
     - target: {fileID: 537941900717722226, guid: 68e6f9587c813aa449e3c034712d51b1,
         type: 3}
