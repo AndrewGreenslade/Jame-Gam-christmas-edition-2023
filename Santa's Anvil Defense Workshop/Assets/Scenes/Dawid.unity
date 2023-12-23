@@ -926,6 +926,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4448866249471012218, guid: ac618b75fc6df1b4bbe912a653d5d4be,
+        type: 3}
+      propertyPath: audioClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448866249471012218, guid: ac618b75fc6df1b4bbe912a653d5d4be,
+        type: 3}
+      propertyPath: 'audioClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 1d59d68f4b7c8234ca418e2b84b3c588, type: 3}
+    - target: {fileID: 4448866249471012218, guid: ac618b75fc6df1b4bbe912a653d5d4be,
+        type: 3}
+      propertyPath: 'audioClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 7398bea91d859224c98e6e5a1613e92b, type: 3}
     - target: {fileID: 4793667425243721322, guid: ac618b75fc6df1b4bbe912a653d5d4be,
         type: 3}
       propertyPath: m_Name

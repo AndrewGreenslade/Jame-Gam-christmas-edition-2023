@@ -35,6 +35,7 @@ public class Weapon : MonoBehaviour
                 }
                 else
                 {
+                    PlayEmpty();
                     anim.SetBool("Shooting", false);
                     StartCoroutine(Reload());
                 }
@@ -74,6 +75,17 @@ public class Weapon : MonoBehaviour
     public void PlayShoot()
     {
         audioSource.clip = audioClips[0];
+        audioSource.Play();
+    }
+    public void PlayReload()
+    {
+        audioSource.clip = audioClips[1];
+        audioSource.Play();
+    }
+
+    public void PlayEmpty()
+    {
+        audioSource.clip = audioClips[2];
         audioSource.Play();
     }
 }
