@@ -29,7 +29,7 @@ public class PlayerWeapons : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.anvilUI.isOpen)
+        if (GameManager.Instance.anvilUI.isOpen || !weapons[currentWeaponIndex].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             return;
         }
