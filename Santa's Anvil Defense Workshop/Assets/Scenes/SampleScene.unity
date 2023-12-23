@@ -308,6 +308,41 @@ PrefabInstance:
       propertyPath: CountdownTime
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1873714474842374136, guid: 68e6f9587c813aa449e3c034712d51b1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.807266
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873714474842374136, guid: 68e6f9587c813aa449e3c034712d51b1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.094179
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873714474842374136, guid: 68e6f9587c813aa449e3c034712d51b1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.496889
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873714474842374136, guid: 68e6f9587c813aa449e3c034712d51b1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.40020305
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873714474842374136, guid: 68e6f9587c813aa449e3c034712d51b1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.04580088
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873714474842374136, guid: 68e6f9587c813aa449e3c034712d51b1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.90933925
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873714474842374136, guid: 68e6f9587c813aa449e3c034712d51b1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.10412541
+      objectReference: {fileID: 0}
     - target: {fileID: 2047934894708764667, guid: 68e6f9587c813aa449e3c034712d51b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1115,6 +1150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793667425243721322, guid: ac618b75fc6df1b4bbe912a653d5d4be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5594750374504259727, guid: ac618b75fc6df1b4bbe912a653d5d4be,
         type: 3}
@@ -2688,11 +2728,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5068348504532094803, guid: d889da79273428648876f6dbe3dadea2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
