@@ -448,13 +448,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5627186919386351230}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071062, y: -0.000000017768123, z: -0.00000013485938, w: 0.7071075}
   m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3593759365516222480}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &7345813371373345494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,7 +1976,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8106834041122312171, guid: 48428a9fc8d223a459cbdf9008f731b6,
     type: 3}
   projectileSpawnPoint: {fileID: 5113947921785443541}
-  projectileForce: 10
+  projectileForce: 1000
 --- !u!82 &8550886170596363749
 AudioSource:
   m_ObjectHideFlags: 0
