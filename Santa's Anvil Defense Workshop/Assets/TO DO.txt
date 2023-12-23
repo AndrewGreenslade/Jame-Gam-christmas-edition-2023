@@ -12,11 +12,3 @@ Random decoration assets:
 	Table
 	baubles
 	icicles celling
-
-
-Animations:
-
-	Reload
-	Shoot
-
-	
