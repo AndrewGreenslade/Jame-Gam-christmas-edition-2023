@@ -47,4 +47,16 @@ public class MeleeWeapon : MonoBehaviour
         audioSource.clip = audioClips[0];
         audioSource.Play();
     }
+
+    private void Start()
+    {
+        anim.keepAnimatorStateOnDisable = true;
+    }
+
+    private void OnEnable()
+    {
+        audioSource.Stop();
+        anim.Rebind();
+        anim.Update(0f);
+    }
 }
