@@ -74,6 +74,7 @@ public class AnvilUI : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.isGameOver) { return; }
         healthBar.fillAmount = GameManager.Instance.Anvil.health / 100f;
         if (countdown != null)
         {
@@ -110,6 +111,7 @@ public class AnvilUI : MonoBehaviour
 
     public void ToySelected(int toyID)
     {
+        if (toySelections[toyID].GetComponent<Button>().interactable == false) { return; }
         HideUI();
         var io = GameManager.Instance.Anvil.ToysToCraft;
         foreach (ToyToCraft t in io)

@@ -77,6 +77,8 @@ public class Anvil : MonoBehaviour
     public int health = 100;
 
     public int toysCount { get { return toysToCraft.Count; } }
+    public AudioSource audioSource;
+    public AudioClip gameOverClip;
 
     private void Start()
     {
@@ -86,6 +88,7 @@ public class Anvil : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.isGameOver) { return; }
         if (countdown > 0)
         {
             countdown -= Time.deltaTime;
@@ -100,7 +103,14 @@ public class Anvil : MonoBehaviour
 
     public void DealDamage(int damage)
     {
+        if (health <= 0) { return; }
         health -= damage;
+        if (health <= 0)
+        {
+            GameManager.Instance.GameOver();
+            audioSource.clip = gameOverClip;
+            audioSource.Play();
+        }
     }
 
     public List<ToyToCraft> ToysToCraft
