@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && !reloading && !anim.GetCurrentAnimatorStateInfo(0).IsName("Fire"))
+        if (Input.GetKey(KeyCode.Mouse0) && !reloading && !anim.GetCurrentAnimatorStateInfo(0).IsName("Fire") && !GameManager.Instance.anvilUI.isOpen)
         {
             if (nextFire < Time.time)
             {
@@ -41,11 +41,11 @@ public class Weapon : MonoBehaviour
                 nextFire = Time.time + fireRate;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0) && !GameManager.Instance.anvilUI.isOpen)
         {
             anim.SetBool("Shooting", false);
         }
-        if (Input.GetKeyDown(KeyCode.R) && !reloading)
+        if (Input.GetKeyDown(KeyCode.R) && !reloading && !GameManager.Instance.anvilUI.isOpen)
         {
             StartCoroutine(Reload());
         }

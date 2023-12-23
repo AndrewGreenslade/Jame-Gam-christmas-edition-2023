@@ -556,8 +556,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4081926418901718278}
   - {fileID: 9007722947949287872}
+  - {fileID: 4081926418901718278}
   - {fileID: 2536151815770283633}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1255,7 +1255,7 @@ GameObject:
   - component: {fileID: 4061225855528455015}
   - component: {fileID: 3610135833887975469}
   - component: {fileID: 4265159563466325236}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}

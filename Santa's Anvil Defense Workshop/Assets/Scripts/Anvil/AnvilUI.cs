@@ -25,6 +25,8 @@ public class AnvilUI : MonoBehaviour
     float openTime;
     bool open;
 
+    public bool isOpen { get { return open; } }
+
     private void Start()
     {
         GameManager.Instance.anvilUI = this;

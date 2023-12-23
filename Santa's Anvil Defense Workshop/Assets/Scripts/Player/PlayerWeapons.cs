@@ -29,6 +29,10 @@ public class PlayerWeapons : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.anvilUI.isOpen)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SwitchWeapons(0);

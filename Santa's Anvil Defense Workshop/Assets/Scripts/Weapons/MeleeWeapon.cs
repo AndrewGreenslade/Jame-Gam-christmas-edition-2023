@@ -15,7 +15,7 @@ public class MeleeWeapon : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && nextAttack <= Time.time)
+        if (Input.GetKey(KeyCode.Mouse0) && nextAttack <= Time.time && !GameManager.Instance.anvilUI.isOpen)
         {
             anim.SetTrigger("Attack");
             nextAttack = Time.time + attackRate;
