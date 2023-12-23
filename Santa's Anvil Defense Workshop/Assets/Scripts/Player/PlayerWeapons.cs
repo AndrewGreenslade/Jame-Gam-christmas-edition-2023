@@ -57,9 +57,17 @@ public class PlayerWeapons : MonoBehaviour
 
     private void SwitchWeapons(int id)
     {
-        if (GameManager.Instance.anvilUI.isOpen)
+        try
         {
-            return;
+            if (GameManager.Instance.anvilUI.isOpen)
+            {
+                return;
+            }
+
+        }
+        catch
+        {
+
         }
         if (id == 10)
         {

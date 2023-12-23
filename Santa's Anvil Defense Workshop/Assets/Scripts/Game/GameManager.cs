@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
         gameOver = true;
         gameOverCamera.SetActive(true);
         GameOverUI.Instance.gameObject.SetActive(true);
+        GameOverUI.Instance.skippableTime = Time.time + 2f;
+        GameOverUI.Instance.scoreText.text = kills.ToString();
         Player.Instance.gameObject.SetActive(false);
         PlayerUI.Instance.gameObject.SetActive(false);
         anvilUI.gameObject.SetActive(false);

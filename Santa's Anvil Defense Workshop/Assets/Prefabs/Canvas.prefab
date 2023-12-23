@@ -264,6 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5843e707c95850847934b23adad2aaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 6323633349537335774}
+  skippableTime: 100000000
 --- !u!1 &2662271623037101109
 GameObject:
   m_ObjectHideFlags: 0
