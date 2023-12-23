@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public GameObject model;
     public GameObject ragdoll;
     public Animator anim;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
 
     public int damage;
     public float attackRate;
@@ -55,6 +57,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        PlayTakeDamage();
         if (health <= 0)
         {
             return;
@@ -63,6 +66,7 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            PlayDead();
             model.SetActive(false);
             ragdoll.SetActive(true);
             //Do death animation?
@@ -89,5 +93,36 @@ public class Enemy : MonoBehaviour
                 nextAttack = Time.time + attackRate;
             }
         }
+    }
+
+    public void PlayTakeDamage()
+    {
+        audioSource.clip = audioClips[0];
+        audioSource.Play();
+    }
+    public void PlayAttack()
+    {
+        audioSource.clip = audioClips[1];
+        audioSource.Play();
+    }
+    public void PlayDead()
+    {
+        audioSource.clip = audioClips[2];
+        audioSource.Play();
+    }
+    public void PlayWalk1()
+    {
+        audioSource.clip = audioClips[3];
+        audioSource.Play();
+    }
+    public void PlayWalk2()
+    {
+        audioSource.clip = audioClips[4];
+        audioSource.Play();
+    }
+    public void PlayIdle()
+    {
+        audioSource.clip = audioClips[5];
+        audioSource.Play();
     }
 }
