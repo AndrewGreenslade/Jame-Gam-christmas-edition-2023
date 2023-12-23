@@ -55,6 +55,10 @@ public class AnvilUI : MonoBehaviour
     public void UpdateToyList()
     {
         var toys = GameManager.Instance.Anvil.ToysToCraft;
+        if (toys.Count >= GameManager.Instance.maxToys)
+        {
+            GameManager.Instance.GameOver();
+        }
         for (int i = 0; i < toys.Count; i++)
         {
             if (toys[i].GameObject == null)

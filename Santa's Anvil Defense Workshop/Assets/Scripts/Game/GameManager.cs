@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public int CountdownTime;
     public int spawnDelay;
     public float spawnRate;
+    public int maxToys;
     public bool hardmode;
     GameObject[] spawnPoints;
     public GameObject enemyPrefab;
