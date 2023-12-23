@@ -25,6 +25,16 @@ public class Enemy : MonoBehaviour
         StartCoroutine(CheckClosest());
     }
 
+    private void Start()
+    {
+
+        Rigidbody[] rbs = ragdoll.GetComponentsInChildren<Rigidbody>();
+        foreach (var rb in rbs)
+        {
+            rb.isKinematic = true;
+        }
+    }
+
     private void Update()
     {
         agent.destination = currentTarget.position;
@@ -67,12 +77,23 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             PlayDead();
-            model.SetActive(false);
-            ragdoll.SetActive(true);
+            // model.SetActive(false);
+            // ragdoll.SetActive(true);
             //Do death animation?
+            Dead();
             GameManager.Instance.kills++;
             gameObject.layer = 2;
             Destroy(gameObject, 5);
+        }
+    }
+
+    public void Dead()
+    {
+        Rigidbody[] rbs = ragdoll.GetComponentsInChildren<Rigidbody>();
+        foreach (var rb in rbs)
+        {
+            rb.isKinematic = false;
+            anim.enabled = false;
         }
     }
 
@@ -108,21 +129,6 @@ public class Enemy : MonoBehaviour
     public void PlayDead()
     {
         audioSource.clip = audioClips[2];
-        audioSource.Play();
-    }
-    public void PlayWalk1()
-    {
-        audioSource.clip = audioClips[3];
-        audioSource.Play();
-    }
-    public void PlayWalk2()
-    {
-        audioSource.clip = audioClips[4];
-        audioSource.Play();
-    }
-    public void PlayIdle()
-    {
-        audioSource.clip = audioClips[5];
         audioSource.Play();
     }
 }

@@ -14,7 +14,6 @@ public class Weapon : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip[] audioClips;
     float nextFire;
-    [HideInInspector]
     public int currentAmmo;
     bool reloading;
 

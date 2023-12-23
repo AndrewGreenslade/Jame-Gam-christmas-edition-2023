@@ -9,18 +9,20 @@ public class MeleeWeapon : MonoBehaviour
     public float attackRange;
     public LayerMask mask;
     float nextAttack;
+    public Animator anim;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
 
     private void Update()
     {
         if (Input.GetKey(KeyCode.Mouse0) && nextAttack <= Time.time)
         {
-            PlayAnimation();
-            CheckHit();
+            anim.SetTrigger("Attack");
             nextAttack = Time.time + attackRate;
         }
     }
 
-    void CheckHit()
+    public void CheckHit()
     {
         RaycastHit hit;
         if (
@@ -40,8 +42,9 @@ public class MeleeWeapon : MonoBehaviour
         }
     }
 
-    void PlayAnimation()
+    public void PlayHit()
     {
-        //Anim stuff
+        audioSource.clip = audioClips[0];
+        audioSource.Play();
     }
 }
