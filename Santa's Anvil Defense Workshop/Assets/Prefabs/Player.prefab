@@ -1607,6 +1607,8 @@ MonoBehaviour:
   audioSource: {fileID: 1682711336777115095}
   audioClips:
   - {fileID: 8300000, guid: 16834aec5b9532845a709f706e7eec16, type: 3}
+  - {fileID: 8300000, guid: 1d59d68f4b7c8234ca418e2b84b3c588, type: 3}
+  - {fileID: 8300000, guid: 7398bea91d859224c98e6e5a1613e92b, type: 3}
   currentAmmo: 0
   mask:
     serializedVersion: 2
