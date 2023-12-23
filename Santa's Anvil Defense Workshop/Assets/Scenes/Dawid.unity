@@ -926,21 +926,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4448866249471012218, guid: ac618b75fc6df1b4bbe912a653d5d4be,
-        type: 3}
-      propertyPath: burstAmount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448866249471012218, guid: ac618b75fc6df1b4bbe912a653d5d4be,
-        type: 3}
-      propertyPath: mask.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4448866249471012218, guid: ac618b75fc6df1b4bbe912a653d5d4be,
-        type: 3}
-      propertyPath: maxDistance
-      value: 10000
-      objectReference: {fileID: 0}
     - target: {fileID: 4793667425243721322, guid: ac618b75fc6df1b4bbe912a653d5d4be,
         type: 3}
       propertyPath: m_Name

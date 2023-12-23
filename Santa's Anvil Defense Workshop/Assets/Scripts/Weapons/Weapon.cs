@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Weapon : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Weapon : MonoBehaviour
     public float reloadTime;
     public float maxDistance;
     public Animator anim;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
     float nextFire;
     [HideInInspector]
     public int currentAmmo;
@@ -22,24 +25,20 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && !reloading)
+        if (Input.GetKey(KeyCode.Mouse0) && !reloading && !anim.GetCurrentAnimatorStateInfo(0).IsName("Fire"))
         {
             if (nextFire < Time.time)
             {
                 if (currentAmmo > 0)
                 {
                     anim.SetBool("Shooting", true);
-                    Shoot();
                 }
                 else
                 {
+                    anim.SetBool("Shooting", false);
                     StartCoroutine(Reload());
                 }
                 nextFire = Time.time + fireRate;
-            }
-            else
-            {
-                anim.SetBool("Shooting", false);
             }
         }
         if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -65,5 +64,16 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = magSize;
         reloading = false;
+    }
+
+    public string GetAmmo()
+    {
+        return currentAmmo.ToString();
+    }
+
+    public void PlayShoot()
+    {
+        audioSource.clip = audioClips[0];
+        audioSource.Play();
     }
 }

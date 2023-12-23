@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class PlayerWeapons : MonoBehaviour
 {
+    public static PlayerWeapons Instance;
     public GameObject[] weapons;
 
     int currentWeaponIndex;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     private void Start()
     {
         SwitchWeapons(0);
+    }
+
+    public GameObject GetCurrentWeapon()
+    {
+        return weapons[currentWeaponIndex];
     }
 
     private void Update()

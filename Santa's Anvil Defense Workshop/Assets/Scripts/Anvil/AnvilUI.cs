@@ -12,7 +12,7 @@ public class AnvilUI : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI countdown;
     [SerializeField]
-    TextMeshProUGUI healthText;
+    Image healthBar;
     public GameObject toySelectionUI;
     public GameObject[] toySelections;
     public GameObject toyToCraftUIPrefab;
@@ -72,7 +72,7 @@ public class AnvilUI : MonoBehaviour
 
     private void Update()
     {
-        healthText.text = GameManager.Instance.Anvil.health.ToString();
+        healthBar.fillAmount = GameManager.Instance.Anvil.health / 100f;
         if (countdown != null)
         {
             countdown.text = GameManager.Instance.Anvil.Countdown;
