@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         get { return _kills; }
         set
         {
+            if (gameOver) { return; }
             _kills = value;
             anvilUI.UpdateToyList();
         }

@@ -18,9 +18,11 @@ public class Enemy : MonoBehaviour
     float nextAttack;
 
     int health = 100;
+    public bool inGame = true;
 
     private void Awake()
     {
+        if (!inGame) { StartCoroutine(RandomTarget()); return; }
         currentTarget = GameManager.Instance.Anvil.transform;
         StartCoroutine(CheckClosest());
     }
@@ -38,6 +40,24 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         agent.destination = currentTarget.position;
+    }
+
+    IEnumerator RandomTarget()
+    {
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            // anim.SetBool("Stopped", true);
+            var points = GameObject.FindGameObjectsWithTag("MainMenuPoint");
+            currentTarget = points[Random.Range(0, points.Length)].transform;
+        }
+        else
+        {
+            // anim.SetBool("Stopped", false);
+        }
+        yield return new WaitForSeconds(1);
+
+        StartCoroutine(RandomTarget());
     }
 
     IEnumerator CheckClosest()
@@ -99,6 +119,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (!inGame) { return; }
         if (nextAttack < Time.time && health > 0)
         {
             if (other.tag == "Anvil")

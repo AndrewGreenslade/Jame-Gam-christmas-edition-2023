@@ -21,6 +21,8 @@ public class AnvilUI : MonoBehaviour
     public Color selectedColor;
     public Color defaultColor;
     public Color disabledColor;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
 
     float openTime;
     bool open;
@@ -54,6 +56,7 @@ public class AnvilUI : MonoBehaviour
 
     public void UpdateToyList()
     {
+        PlayNewToy();
         var toys = GameManager.Instance.Anvil.ToysToCraft;
         if (toys.Count == GameManager.Instance.maxToys)
         {
@@ -152,5 +155,11 @@ public class AnvilUI : MonoBehaviour
         toySelectionUI.SetActive(true);
         BaseFirstPersonController.Instance.pause = true;
         BaseFirstPersonController.Instance.mouseLook.SetCursorLock(false);
+    }
+
+    public void PlayNewToy()
+    {
+        audioSource.clip = audioClips[0];
+        audioSource.Play();
     }
 }
