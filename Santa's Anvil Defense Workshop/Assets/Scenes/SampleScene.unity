@@ -155,6 +155,11 @@ PrefabInstance:
       propertyPath: CountdownTime
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 537941900717722226, guid: 68e6f9587c813aa449e3c034712d51b1,
+        type: 3}
+      propertyPath: increaseEnemiesSpawnRateSeconds
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1873714474842374136, guid: 68e6f9587c813aa449e3c034712d51b1,
         type: 3}
       propertyPath: m_LocalPosition.x
