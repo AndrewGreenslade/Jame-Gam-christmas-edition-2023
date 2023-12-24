@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public int spawnDelay;
     public float spawnRate;
     public int maxToys;
+    public int increaseEnemiesSpawnRateSeconds;
     public bool hardmode;
     GameObject[] spawnPoints;
     public GameObject enemyPrefab;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         GameOverUI.Instance.gameObject.SetActive(false);
+        StartCoroutine(IncreaseSpawnRate());
     }
 
     public void GameOver()
@@ -70,6 +72,17 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
         yield return null;
+    }
+
+    IEnumerator IncreaseSpawnRate()
+    {
+        yield return new WaitForSeconds(increaseEnemiesSpawnRateSeconds);
+        spawnRate -= 0.1f;
+        if (spawnRate <= 0.5f) { yield return null; }
+        else
+        {
+            StartCoroutine(IncreaseSpawnRate());
+        }
     }
 
     public bool isGameOver { get { return gameOver; } }

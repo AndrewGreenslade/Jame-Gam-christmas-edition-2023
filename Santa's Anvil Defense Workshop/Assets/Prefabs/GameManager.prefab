@@ -219,7 +219,8 @@ MonoBehaviour:
   CountdownTime: 5
   spawnDelay: 0
   spawnRate: 1
-  maxToys: 1
+  maxToys: 5
+  increaseEnemiesSpawnRateSeconds: 30
   hardmode: 1
   enemyPrefab: {fileID: 5892278404825385362, guid: 193b4971ff61635449c8782d6b289334,
     type: 3}
